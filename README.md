@@ -4,9 +4,8 @@ This module allows a person to resize panes in atom. It adds a handle between pa
 
 To install and use this awesome extension:
 
- 1. Download the `atom-resize-panes` directory
- 2. Place it in the root of your atom config folder
-      (`~/.atom/`, `C:\Users\Username\.atom\`)
+ 1. Download [this repository as a zip file](https://github.com/pitaj/atom-resize-panes/archive/master.zip)
+ 2. Extract it into a directory called `atom-resize-panes` in the root of your atom config folder (`~/.atom/`, `C:\Users\Username\.atom\`)
  3. Add the following line to your Init Script (`init.coffee`)
       `require("./atom-resize-panes")()`
  4. Add the following line to your Stylesheet (`styles.less`)
@@ -23,7 +22,7 @@ To install and use this awesome extension:
 
 ### Want to make this a package?
 
-I hate Coffeescript, and I'm not going to learn it just so I can convert this project into an atom package. If anyone wants to do so, you are welcome to, just give me some credit.
+I hate Coffeescript, and I'm not going to learn it just so I can convert this project into an atom package. If anyone wants to do so, you are welcome to, just give me some credit (and tell me when you do :smiley:).
 
 ### Known bugs
 
