@@ -2,6 +2,8 @@ module.exports = function(){
 
   "use strict";
 
+  var max = 95;
+
   function fullPath(el){
     var names = [];
     while (el.parentNode){
@@ -51,6 +53,17 @@ module.exports = function(){
 
   onPaneChange();
 
+  function onResize(){
+    document.querySelectorAll("atom-pane-axis.vertical > atom-pane:not(:last-child), "+
+        "atom-pane-axis.vertical > atom-pane-axis:not(:last-child)").forEach(function(it){
+      var parentHeight = parseInt(document.defaultView.getComputedStyle(it.parentNode).height, 10) * max / 100;
+      var currentHeight = parseInt(document.defaultView.getComputedStyle(it).height, 10);
+      it.style.maxHeight = it.style.minHeight = Math.min(currentHeight, parentHeight) + 'px';
+    });
+  }
+
+  window.addEventListener("resize", onResize, false);
+
   function onPaneChange() {
 
     // ---- Handle horizontal panes ----
@@ -69,7 +82,7 @@ module.exports = function(){
 
       function doDrag(e) {
         //console.log("dragging", startX, startWidth, e.clientX);
-        it.style.maxWidth = it.style.minWidth = (startWidth + e.clientX) * parentWidth + '%';
+        it.style.maxWidth = it.style.minWidth = Math.min((startWidth + e.clientX) * parentWidth, max) + '%';
       }
 
       function stopDrag() {
@@ -101,11 +114,12 @@ module.exports = function(){
     });
 
     document.querySelectorAll("atom-pane-axis.vertical > atom-pane-dragger").forEach(function(elem){
-      var /*parentHeight,*/ startHeight, it = elem.previousSibling;
+      var startHeight, it = elem.previousSibling;
+      var parentHeight;
 
       function doDrag(e) {
         //console.log("dragging", startY, startHeight, e.clientY);
-        it.style.maxHeight = it.style.minHeight = (startHeight + e.clientY) /** parentHeight + '%'*/ + 'px';
+        it.style.maxHeight = it.style.minHeight = Math.min((startHeight + e.clientY), parentHeight) + 'px'; // * parentHeight + '%';
       }
 
       function stopDrag() {
@@ -118,6 +132,7 @@ module.exports = function(){
         //console.log("drag started");
         startHeight = parseInt(document.defaultView.getComputedStyle(it).height, 10) - e.clientY;
         //parentHeight = 100 / parseInt(document.defaultView.getComputedStyle(it.parentNode).height, 10);
+        parentHeight = parseInt(document.defaultView.getComputedStyle(it.parentNode).height, 10) * max / 100;
         document.documentElement.addEventListener('mousemove', doDrag, false);
         document.documentElement.addEventListener('mouseup', stopDrag, false);
       }
