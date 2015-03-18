@@ -53,8 +53,6 @@ module.exports = function(){
 
   function onPaneChange() {
 
-    //console.log("event fired", e);
-
     // ---- Handle horizontal panes ----
 
     document.querySelectorAll("atom-pane-axis.horizontal > atom-pane-dragger").forEach(function(elem){
@@ -67,11 +65,11 @@ module.exports = function(){
     });
 
     document.querySelectorAll("atom-pane-axis.horizontal > atom-pane-dragger").forEach(function(elem){
-      var startX, startWidth, it = elem.previousSibling;
+      var startWidth, parentWidth, it = elem.previousSibling;
 
       function doDrag(e) {
         //console.log("dragging", startX, startWidth, e.clientX);
-        it.style.maxWidth = it.style.minWidth = (startWidth + e.clientX - startX) + 'px';
+        it.style.maxWidth = it.style.minWidth = (startWidth + e.clientX) * parentWidth + '%';
       }
 
       function stopDrag() {
@@ -82,8 +80,8 @@ module.exports = function(){
 
       function initDrag(e) {
         //console.log("drag started");
-        startX = e.clientX;
-        startWidth = parseInt(document.defaultView.getComputedStyle(it).width, 10);
+        startWidth = parseInt(document.defaultView.getComputedStyle(it).width, 10) - e.clientX;
+        parentWidth = 100 / parseInt(document.defaultView.getComputedStyle(it.parentNode).width, 10);
         document.documentElement.addEventListener('mousemove', doDrag, false);
         document.documentElement.addEventListener('mouseup', stopDrag, false);
       }
@@ -97,16 +95,17 @@ module.exports = function(){
       elem.parentNode.removeChild(elem);
     });
 
-    document.querySelectorAll("atom-pane-axis.vertical > atom-pane:not(:last-child), atom-pane-axis.vertical > atom-pane-axis:not(:last-child)").forEach(function(elem){
+    document.querySelectorAll("atom-pane-axis.vertical > atom-pane:not(:last-child), "+
+        "atom-pane-axis.vertical > atom-pane-axis:not(:last-child)").forEach(function(elem){
       elem.insertAdjacentHTML('afterend', '<atom-pane-dragger class="pane-dragger" tabindex="-1"></atom-pane-dragger>');
     });
 
     document.querySelectorAll("atom-pane-axis.vertical > atom-pane-dragger").forEach(function(elem){
-      var startY, startHeight, it = elem.previousSibling;
+      var /*parentHeight,*/ startHeight, it = elem.previousSibling;
 
       function doDrag(e) {
-        //console.log("dragging", startX, startWidth, e.clientX);
-        it.style.maxHeight = it.style.minHeight = (startHeight + e.clientY - startY) + 'px';
+        //console.log("dragging", startY, startHeight, e.clientY);
+        it.style.maxHeight = it.style.minHeight = (startHeight + e.clientY) /** parentHeight + '%'*/ + 'px';
       }
 
       function stopDrag() {
@@ -117,8 +116,8 @@ module.exports = function(){
 
       function initDrag(e) {
         //console.log("drag started");
-        startY = e.clientY;
-        startHeight = parseInt(document.defaultView.getComputedStyle(it).height, 10);
+        startHeight = parseInt(document.defaultView.getComputedStyle(it).height, 10) - e.clientY;
+        //parentHeight = 100 / parseInt(document.defaultView.getComputedStyle(it.parentNode).height, 10);
         document.documentElement.addEventListener('mousemove', doDrag, false);
         document.documentElement.addEventListener('mouseup', stopDrag, false);
       }
@@ -169,6 +168,8 @@ module.exports = function(){
         });
       }
     })();
+
+    console.log("atom-resize-panes loaded");
 
   }
 
