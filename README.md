@@ -23,7 +23,3 @@ To install and use this awesome extension:
 ### Want to make this a package?
 
 I hate Coffeescript, and I'm not going to learn it just so I can convert this project into an atom package. If anyone wants to do so, you are welcome to, just give me some credit (and tell me when you do :smiley:).
-
-### Known bugs
-
- - Pane can be made larger than window
