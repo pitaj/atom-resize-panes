@@ -1,0 +1,12 @@
+{
+    "name": "atom-resize-panes",
+    "main": "./lib/atom-resize-panes",
+    "version": "0.1.0",
+    "description": "Add resize handles to Atom panes",
+    "repository": "https://github.com/pitaj/atom-resize-panes",
+    "license": "MIT",
+    "engines": {
+        "atom": ">=0.174.0 <2.0.0"
+    },
+    "dependencies": {}
+}
