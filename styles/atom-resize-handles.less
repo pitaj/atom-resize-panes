@@ -1,0 +1,31 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+// @import "ui-variables";
+
+atom-pane:only-child {
+	max-width: initial !important;
+	min-width: initial !important;
+	max-height: initial !important;
+	min-height: initial !important;
+}
+
+atom-pane-axis.horizontal > atom-pane {
+	max-height: initial !important;
+	min-height: initial !important;
+}
+
+atom-pane-axis.vertical > atom-pane {
+	max-width: initial !important;
+	min-width: initial !important;
+}
+
+atom-pane-resize-handle {
+	-webkit-user-select: none;
+	cursor: ew-resize;
+}
+
+atom-pane-axis.vertical > atom-pane-resize-handle {
+	cursor: ns-resize;
+}

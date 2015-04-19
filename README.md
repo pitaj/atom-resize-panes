@@ -1,25 +1,11 @@
-# Resize atom.io Panes
+# Atom Resize Panes
+Adds resize handles on Atom panes so they can be resized with the mouse.
 
-This module allows a person to resize panes in atom. It adds a handle between panes that can be dragged to adjust the size of a pane.
-
-To install and use this awesome extension:
-
- 1. Download [this repository as a zip file](https://github.com/pitaj/atom-resize-panes/archive/master.zip)
- 2. Extract it into a directory called `atom-resize-panes` in the root of your atom config folder (`~/.atom/`, `C:\Users\Username\.atom\`)
- 3. Add the following line to your Init Script (`init.coffee`)
-      `require("./atom-resize-panes")()`
- 4. Add the following line to your Stylesheet (`styles.less`)
-      `@import "atom-resize-panes/main.less";`
- 5. Profit
+_Use **Left Click** to resize, and **Middle Click** to reset._
 
 ### Features
+* Resize both horizontal and vertical panes
+* Change the resize handles thickness
 
- - Saves pane sizes per project
- - Works for all type of panes (vertical, horizontal, mixed)
- - Change the width of the handle bar (default `10px`)
-      Add this line after the `@import` statement in your Stylesheet
-      `@atom-resize-thickness: 5px;` (replace `5px` with the width you want)
-
-### Want to make this a package?
-
-I hate Coffeescript, and I'm not going to learn it just so I can convert this project into an atom package. If anyone wants to do so, you are welcome to, just give me some credit (and tell me when you do :smiley:).
+### Known Issues
+* Can have weird behavior when splitting an axis in to more than 2 panes
