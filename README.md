@@ -1,3 +1,5 @@
+### *Deprecated - This feature is in atom.io by default*
+
 # Resize atom.io Panes
 
 This module allows a person to resize panes in atom. It adds a handle between panes that can be dragged to adjust the size of a pane.
